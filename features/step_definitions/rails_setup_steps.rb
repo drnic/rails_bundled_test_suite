@@ -1,14 +1,10 @@
 Given /^a Rails app$/ do
-  FileUtils.chdir(@tmp_root) do
-    `rails my_project`
-  end
+  FileUtils.chdir(@tmp_root)  { `rails my_project` }
   @active_project_folder = File.expand_path(File.join(@tmp_root, "my_project"))
 end
 
 Given /^I copy the project generators into "([^\"]*)"$/ do |target_folder|
-  in_project_folder do
-    FileUtils.mkdir_p(target_folder)
-  end
+  in_project_folder { FileUtils.mkdir_p(target_folder) }
   `cp -rf #{File.dirname(__FILE__) + "/../../rails_generators/*"} #{File.join(@active_project_folder, target_folder)}`
 end
 
@@ -28,9 +24,6 @@ end
 
 After do
   in_project_folder do
-    Given 'I invoke task "rake culerity:rails:stop"'
+    # Given 'I invoke task "rake culerity:rails:stop"'
   end
 end
-
-# rake culerity:rails:start [RAILS=culerity_development]
-# rake culerity:rails:stop
