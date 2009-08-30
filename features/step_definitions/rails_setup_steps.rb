@@ -8,6 +8,13 @@ Given /^I copy the project generators into "([^\"]*)"$/ do |target_folder|
   `cp -rf #{File.dirname(__FILE__) + "/../../rails_generators/*"} #{File.join(@active_project_folder, target_folder)}`
 end
 
+Given /^I install the special "([^\"]*)" plugin$/ do |plugin|
+  gem_dir     = File.join(File.dirname(__FILE__), "../../vendor/gems", plugin)
+  raise "#{plugin} gem doesn't exist at #{gem_dir}" unless File.exists?(gem_dir)
+  plugins_dir = File.join(@active_project_folder, "vendor",  "plugins")
+  `cp -rf #{gem_dir} #{plugins_dir}/`
+end
+
 When /^I add a feature file to test Rails index.html default file$/ do
   sample_feature = File.expand_path(File.dirname(__FILE__) + "/../fixtures/sample_rails_feature")
   in_project_folder do

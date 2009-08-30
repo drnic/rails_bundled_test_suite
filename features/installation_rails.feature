@@ -8,6 +8,7 @@ Feature: Installing bundle into Rails app
     And I run executable "script/generate" with arguments "cucumber"
     # And I delete file "features/step_definitions/webrat_steps.rb"
     And I copy the project generators into "vendor/generators"
+    And I install the special "webrat" plugin
     And I invoke task "rake db:migrate"
     When I run executable "script/generate" with arguments "test_bundle"
     And I setup load path to local code

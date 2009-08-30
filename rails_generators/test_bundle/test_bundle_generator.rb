@@ -13,7 +13,8 @@ class TestBundleGenerator < Rails::Generator::NamedBase
   protected
     def banner
       <<-EOS
-Creates a ...
+Installs an integration test suite into your Rails app that can
+test JavaScript via normal webrat (and cucumber) commands.
 
 USAGE: #{$0} #{spec.name} name
 EOS
